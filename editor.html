@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="path/to/codemirror.css">
+    <script src="path/to/codemirror.js"></script>
+    <script src="path/to/mode/xml/xml.js"></script> ```
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактор - Code Runner Pro</title>
+    <style>
+        /* === ГЛОБАЛЬНЫЕ И БАЗОВЫЕ СТИЛИ === */
+        body {
+            font-family: 'Inter', 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+            /* Плавное появление */
+            opacity: 0; 
+            animation: fadeIn 0.8s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* === ТЁМНАЯ ТЕМА (ПО УМОЛЧАНИЮ) === */
+        body {
+            background-color: #121212; /* Очень тёмный фон */
+            color: #E0E0E0;
+        }
+
+        /* === Верхняя панель управления (TOOLBAR) === */
+        .toolbar {
+            padding: 8px 20px;
+            background-color: #1E1E1E; /* Фон панели */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+        }
+        .toolbar-left, .toolbar-right {
+            display: flex;
+            align-items: center;
+        }
+        .toolbar-title {
+            font-size: 1.2em;
+            margin: 0;
+            color: #9cdcfe; /* Светло-голубой акцент */
+            font-weight: 500;
+        }
+
+        /* === Рабочая область (WORKSPACE) === */
+        .workspace {
+            display: flex;
+            flex-grow: 1; 
+            height: calc(100vh - 56px); /* 56px = высота Toolbar */
+        }
+
+        /* === ПАНЕЛИ РЕДАКТОРА и РЕЗУЛЬТАТА === */
+        .panel {
+            flex: 1; 
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #333;
+        }
+        .output-panel {
+            border-right: none;
+        }
+        .panel-header {
+            padding: 5px 15px;
+            margin: 0;
+            background-color: #252526; /* Фон заголовка панели */
+            color: #B0B0B0;
+            font-size: 0.9em;
+            font-weight: bold;
+            border-bottom: 1px solid #333;
+        }
+
+        /* === Текстовое поле (EDITOR) === */
+        textarea {
+            flex-grow: 1; 
+            width: 100%;
+            padding: 15px;
+            border: none;
+            box-sizing: border-box;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            background-color: #1E1E1E; /* Фон кода */
+            color: #D4D4D4; /* Цвет текста кода */
+        }
+        
+        /* === IFRAME (РЕЗУЛЬТАТ) === */
+        iframe {
+            flex-grow: 1;
+            width: 100%;
+            border: none;
+            background-color: #1E1E1E; /* ЧЕРНЫЙ ФОН по умолчанию */
+        }
+
+        /* === КНОПКИ и ССЫЛКИ === */
+        .button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            margin-left: 8px;
+            transition: background-color 0.2s, opacity 0.2s;
+            text-decoration: none; 
+            font-weight: 600;
+        }
+        
+        /* Кнопка "Вернуться на Главную" */
+        .home-button {
+            color: #B0B0B0;
+            margin-right: 20px;
+            text-decoration: none;
+            padding: 8px 0;
+            font-weight: normal;
+        }
+        .home-button:hover {
+            color: #007ACC;
+        }
+
+        /* Кнопка RUN */
+        .run-button {
+            background-color: #007ACC; /* Синий */
+            color: white;
+        }
+        .run-button:hover {
+            background-color: #0099FF;
+        }
+        
+        /* Кнопка Скачать */
+        .download-button {
+            background-color: #38761d; 
+            color: white;
+        }
+        .download-button:hover {
+            background-color: #5d983e;
+        }
+        
+        /* Кнопка Темы */
+        .theme-button {
+            background-color: #333;
+            color: #CCC;
+        }
+        .theme-button:hover {
+            background-color: #555;
+        }
+
+        /* === СВЕТЛАЯ ТЕМА === */
+        body.light-theme {
+             background-color: #f4f4f4;
+             color: #333;
+        }
+        body.light-theme .toolbar {
+            background-color: #ffffff;
+            color: #333;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        }
+        body.light-theme .toolbar-title {
+            color: #007ACC;
+        }
+        body.light-theme .panel-header {
+             background-color: #e0e0e0;
+             color: #333;
+             border-bottom: 1px solid #ccc;
+        }
+        body.light-theme .panel {
+            border-right: 1px solid #ccc;
+        }
+        body.light-theme textarea {
+             background-color: #ffffff;
+             color: #333;
+        }
+        body.light-theme iframe {
+             background-color: white; /* Фон iframe при светлой теме - белый */
+        }
+        body.light-theme .home-button {
+            color: #007ACC;
+        }
+        body.light-theme .theme-button {
+             background-color: #DDD;
+             color: #333;
+        }
+    </style>
+</head>
+<body id="pageBody">
+
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <a href="index.html" class="home-button">
+                &#9664; На главную
+            </a>
+            <h2 class="toolbar-title">&lt;/&gt; Code Runner Pro Editor</h2>
+        </div>
+        <div class="toolbar-right">
+            <button class="button download-button" onclick="downloadCode()">💾 Скачать HTML</button>
+            <button class="button theme-button" id="themeToggle" onclick="toggleTheme()">☀️ Светлая Тема</button>
+            <button class="button run-button" onclick="runCode()">▶️ Запустить</button>
+        </div>
+    </div>
+
+    <div class="workspace">
+        <div class="panel editor-panel">
+            <div class="panel-header">КОД: HTML / CSS / JS</div>
+           <textarea 
+    id="htmlCode" 
+    placeholder="<h1 style='color: #007ACC;'>Добро пожаловать в онлайн редактор кода!</h1>
+<p>Запустите код, чтобы увидеть его справа.</p>"
+    
+    oninput="saveCode()"  
+    
+    >
+</textarea>
+        </div>
+
+        <div class="panel output-panel">
+            <div class="panel-header">ПРЕДПРОСМОТР (Результат)</div>
+            <iframe id="outputFrame"></iframe>
+        </div>
+    </div>
+
+    <script>
+
+</body>
+</html>

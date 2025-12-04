@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документация - Code Runner Pro</title>
+    <style>
+        /* ================================================= */
+        /* === БАЗОВЫЕ СТИЛИ ИЗ index.html === */
+        /* ================================================= */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0A192F 0%, #000000 100%);
+            color: #E6E6E6;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0; /* Анимация появления */
+            animation: fadeIn 0.8s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00FFFF;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+        .nav a {
+            color: #B3B3B3;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+        .nav a:hover {
+            color: #00FFFF;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: #007ACC;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 122, 204, 0.4);
+        }
+        .cta-button:hover {
+            background-color: #0099FF;
+        }
+        footer {
+            padding: 15px 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            font-size: 0.9em;
+        }
+        /* ================================================= */
+        /* === НОВЫЕ СТИЛИ ДЛЯ КОНТЕНТА === */
+        /* ================================================= */
+        .content-section {
+            padding: 50px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            flex-grow: 1;
+            background-color: rgba(30, 30, 30, 0.7); 
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .content-section h2 {
+            font-size: 2.5em;
+            color: #00FFFF;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #00FFFF; 
+            text-align: center;
+        }
+        .content-section h3 {
+            font-size: 1.8em;
+            color: #007ACC;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content-section p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        /* Стили для упорядоченных списков (Шаги) */
+        .content-section ol {
+            padding-left: 0;
+            list-style-type: none;
+            counter-reset: my-counter; /* Сброс счетчика */
+        }
+        .content-section ol li {
+            counter-increment: my-counter; /* Увеличение счетчика */
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #252525;
+            border-radius: 6px;
+            line-height: 1.4;
+        }
+        .content-section ol li::before {
+            content: counter(my-counter); /* Вывод номера шага */
+            background-color: #00FFFF;
+            color: #0A192F;
+            font-weight: bold;
+            font-size: 1.2em;
+            padding: 5px 10px;
+            margin-right: 15px;
+            border-radius: 50%;
+            display: inline-block;
+            text-align: center;
+        }
+        /* Блок кода */
+        .code-block {
+            background-color: #1e1e1e;
+            color: #D4D4D4;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            overflow-x: auto;
+            border: 1px solid #333;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">CODE RUNNER PRO</div>
+        <nav class="nav">
+            <a href="about.html">О Нас</a>
+            <a href="docs.html">Документация</a>
+        </nav>
+    </header>
+
+    <main class="content-section">
+        <h2>📚 Документация и Руководство</h2>
+
+        <p>
+            Code Runner Pro разработан для максимально простого использования. Следуйте этим шагам, чтобы начать работу с вашим кодом.
+        </p>
+
+        <h3>Как Пользоваться Редактором</h3>
+        <ol>
+            <li>
+                **Переход:** Нажмите кнопку "**НАЧАТЬ РЕДАКТИРОВАНИЕ**" на главной странице или используйте кнопку "**Вернуться на главную**" в редакторе.
+            </li>
+            <li>
+                **Ввод кода:** На странице редактора в левом поле **"HTML / CSS"** введите свой HTML-код. Вы можете использовать `<style>` для CSS и `<script>` для JavaScript прямо внутри HTML.
+                <div class="code-block">&lt;h1 style="color: red;"&gt;Привет!&lt;/h1&gt;</div>
+            </li>
+            <li>
+                **Запуск:** Нажмите кнопку **"▶️ RUN"** в верхней панели. Ваш код немедленно отобразится в правом окне **"Результат"**.
+            </li>
+            <li>
+                **Смена темы:** Используйте кнопку **"☀️ Светлая Тема"** (или **"🌙 Тёмная Тема"**), чтобы переключить цветовую схему. Ваш выбор сохранится при следующем посещении.
+            </li>
+        </ol>
+
+        <p style="text-align: center; margin-top: 40px;">
+            <a href="editor.html" class="cta-button">ПЕРЕЙТИ В РЕДАКТОР</a>
+        </p>
+    </main>
+
+    <footer>
+        &copy; 2025 Code Runner Pro. Все права защищены.
+    </footer>
+</body>
+</html>

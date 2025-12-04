@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О Нас - Code Runner Pro</title>
+    <style>
+        /* ================================================= */
+        /* === БАЗОВЫЕ СТИЛИ ИЗ index.html === */
+        /* ================================================= */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0A192F 0%, #000000 100%);
+            color: #E6E6E6;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0; /* Анимация появления */
+            animation: fadeIn 0.8s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00FFFF;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+        .nav a {
+            color: #B3B3B3;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+        .nav a:hover {
+            color: #00FFFF;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: #007ACC;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 122, 204, 0.4);
+        }
+        .cta-button:hover {
+            background-color: #0099FF;
+        }
+        footer {
+            padding: 15px 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            font-size: 0.9em;
+        }
+        /* ================================================= */
+        /* === НОВЫЕ СТИЛИ ДЛЯ КОНТЕНТА === */
+        /* ================================================= */
+        .content-section {
+            padding: 50px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            flex-grow: 1;
+            /* Фон для контента, чтобы выделить его из градиента */
+            background-color: rgba(30, 30, 30, 0.7); 
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .content-section h2 {
+            font-size: 2.5em;
+            color: #00FFFF;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #00FFFF; /* Подчеркивание */
+            text-align: center;
+        }
+        .content-section h3 {
+            font-size: 1.8em;
+            color: #007ACC;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content-section p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        /* Стили для списков */
+        .content-section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .content-section ul li {
+            background-color: #252525;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-left: 3px solid #007ACC;
+            border-radius: 4px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">CODE RUNNER PRO</div>
+        <nav class="nav">
+            <a href="about.html">О Нас</a>
+            <a href="docs.html">Документация</a>
+        </nav>
+    </header>
+
+    <main class="content-section">
+        <h2>🛠️ О Проекте Code Runner Pro</h2>
+        
+        <p>
+            **Code Runner Pro** — это простой и быстрый инструмент для моментального тестирования HTML и CSS кода прямо в вашем браузере. Наша миссия — предоставить разработчикам, студентам и всем, кто изучает веб-технологии, чистую и удобную песочницу для экспериментов.
+        </p>
+
+        <h3>Наши Принципы</h3>
+        <p>
+            Мы верим в минимализм и эффективность. Наш редактор не требует регистрации, скачивания или сложной настройки. Вы просто открываете страницу, пишете код и мгновенно видите результат.
+        </p>
+        <ul>
+            <li>**Мгновенный результат:** Код отображается без задержек.</li>
+            <li>**Тёмная тема:** Максимальный комфорт для глаз.</li>
+            <li>**Локальное использование:** Инструмент работает прямо с вашего компьютера.</li>
+        </ul>
+
+        <p style="text-align: center; margin-top: 40px;">
+            <a href="editor.html" class="cta-button">НАЧАТЬ РЕДАКТИРОВАНИЕ</a>
+        </p>
+    </main>
+
+    <footer>
+        &copy; 2025 Code Runner Pro. Все права защищены.
+    </footer>
+</body>
+</html>
